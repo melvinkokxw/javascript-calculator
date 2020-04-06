@@ -1,0 +1,63 @@
+:root {
+  --color1: #000000;
+  --color2: #FFFFFF;
+  --color3: #FD9D0D;
+}
+
+body {
+  font-color: var(--color1);
+  font-size: 35px;
+}
+
+.container {
+  background-color: var(--color1);
+  border: 3vw solid;
+  border-radius: 10px;
+  margin: auto;
+  width: 70vw;
+  min-width: 360px;
+  display: grid;
+  grid-template: repeat(6, 1fr) / repeat(4, 1fr);
+  grid-gap: 2vw;
+  place-items: stretch;
+
+}
+
+.screen {
+  background-color: var(--color2);
+  border-radius: 10px;
+  grid-column: 1 / 5;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.input {
+  justify-self: start;
+}
+
+.output {
+  justify-self: end;
+}
+
+.button {
+  background-color: var(--color2);
+  border-radius: 10px;
+  padding: 2.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.operator {
+  background-color: var(--color3);
+}
+
+.button:hover {
+  opacity: 0.65;
+  border: 2px solid grey;
+  cursor: pointer;
+}
+
+#zero {
+  grid-column: 1 / 3;
+}
