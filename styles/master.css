@@ -4,21 +4,23 @@
   --color3: #FD9D0D;
 }
 
-body {
-  font-color: var(--color1);
+body, button {
+  font-family: Arial;
+  color: var(--color1);
   font-size: 35px;
+  font-weight: 700;
 }
 
 .container {
   background-color: var(--color1);
-  border: 3vw solid;
+  border: 10px solid;
   border-radius: 10px;
   margin: auto;
-  width: 70vw;
+  width: 30vw;
   min-width: 360px;
   display: grid;
   grid-template: repeat(6, 1fr) / repeat(4, 1fr);
-  grid-gap: 2vw;
+  grid-gap: 1vw;
   place-items: stretch;
 
 }
@@ -42,7 +44,8 @@ body {
 .button {
   background-color: var(--color2);
   border-radius: 10px;
-  padding: 2.5vw;
+  border: 2px solid var(--color1);
+  padding: 1vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,6 +60,7 @@ body {
   border: 2px solid grey;
   cursor: pointer;
 }
+
 
 #zero {
   grid-column: 1 / 3;
