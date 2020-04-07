@@ -8,8 +8,12 @@
   <body>
     <div class="container">
       <div class="screen">
-        <span class="input text"></span>
-        <span class="output text">output</span>
+        <div class="input">
+          <span class="numberDisplay1"></span>
+          <span class="operatorDisplay"></span>
+          <span class="numberDisplay2"></span>
+        </div>
+        <span class="output"></span>
       </div>
 
       <button class="button" id="clear">C</button>
@@ -46,9 +50,9 @@
 
       <button class="button number" id="zero">0</button>
 
-      <button class="button" id="point">.</button>
+      <button class="button" id="dot">.</button>
 
-      <button class="button operator" id="equal">=</button>
+      <button class="button" id="equal">=</button>
     </div>
 
     <script src="./scripts/calculator.js" charset="utf-8"></script>
