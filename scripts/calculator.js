@@ -107,8 +107,14 @@ function logOperator(input) {
 }
 
 function logEqual() {
-  if (number1==="" || number2==="" || number1==="." || number2===".") {
-    outputDisplay.textContent = "ERROR";
+  if (operator === "" && number2 ==="") {
+    result = number1;
+    updateInputDisplay();
+    updateOutputDisplay();
+  } else if (operator !== "" && number2 ==="") {
+    return;
+  } else if (number1==="." || number2===".") {
+    return;
   } else {
     execOperate();
     number1 = result.toString();
