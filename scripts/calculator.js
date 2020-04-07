@@ -26,3 +26,19 @@ function operate(num1, num2, operator) {
       return divide(num1, num2);
   }
 }
+
+const numbers = document.querySelectorAll('.number');
+const inputDisplay = document.querySelector('.input');
+
+let inputStr = "";
+let inputOpr = "";
+
+function logKey(e) {
+  inputStr += e.target.textContent;
+  inputDisplay.textContent = inputStr;
+}
+
+
+numbers.forEach(number => {
+  number.addEventListener('click', logKey);
+});
