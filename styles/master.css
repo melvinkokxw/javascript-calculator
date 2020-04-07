@@ -7,7 +7,7 @@
 body, button {
   font-family: Arial;
   color: var(--color1);
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 700;
 }
 
@@ -16,11 +16,10 @@ body, button {
   border: 10px solid;
   border-radius: 10px;
   margin: auto;
-  width: 30vw;
-  min-width: 360px;
+  width: 360px;
   display: grid;
   grid-template: repeat(6, 1fr) / repeat(4, 1fr);
-  grid-gap: 1vw;
+  grid-gap: 5px;
   place-items: stretch;
 
 }
@@ -45,13 +44,10 @@ body, button {
   background-color: var(--color2);
   border-radius: 10px;
   border: 2px solid var(--color1);
-  padding: 1vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 20px;
 }
 
-.operator {
+.operator, #equal {
   background-color: var(--color3);
 }
 
