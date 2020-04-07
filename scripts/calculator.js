@@ -22,6 +22,8 @@ function operate(num1, num2, operator) {
       return subtract(num1, num2);
     case "x":
       return multiply(num1, num2);
+    case "*":
+        return multiply(num1, num2);
     case "/":
       return divide(num1, num2);
   }
@@ -64,40 +66,55 @@ function checkPointExists() {
   }
 }
 
-function logKey(e) {
-  outputDisplay.textContent = "";
+function logKey(input) {
+  updateOutputDisplay();
   if(pointer === "1") {
-    if(e.target.textContent === "." && checkPointExists()) {
+    if(input === "." && checkPointExists()) {
       return;
+    } else if (result!==""){
+      clearAll();
+      number1 += input;
     } else {
-      number1 += e.target.textContent;
+      number1 += input;
     }
-  } else if (pointer === "2") {
-    if(e.target.textContent === "." && checkPointExists()) {
+  } else {
+    if(input === "." && checkPointExists()) {
       return;
     } else {
-      number2 += e.target.textContent;
+      number2 += input;
     }
   }
   updateInputDisplay();
 }
 
-function logOperator(e) {
+function logOperator(input) {
   if(number1 === "") {
     return;
   } else if (pointer === "1") {
-    operator = e.target.textContent;
+    operator = input;
     updateInputDisplay();
     pointer = "2";
   } else if (pointer === "2" && number2===""){
-    operator = e.target.textContent;
+    operator = input;
     updateInputDisplay();
-  } else if (pointer === "2" && number2!=="") {
+  } else if (pointer === "2" && (number2!=="" || number2!==".")) {
     execOperate();
     number1 = result.toString();
     number2 = "";
     result = "";
-    operator = e.target.textContent;
+    operator = input;
+  }
+}
+
+function logEqual() {
+  if (number1==="" || number2==="" || number1==="." || number2===".") {
+    outputDisplay.textContent = "ERROR";
+  } else {
+    execOperate();
+    number1 = result.toString();
+    number2 = "";
+    operator = "";
+    pointer = "1";
   }
 }
 
@@ -106,17 +123,6 @@ function execOperate() {
   number2 = parseFloat(number2);
   result = operate(number1,number2,operator);
   updateOutputDisplay();
-}
-
-function logEqual() {
-  if (number1==="" || number2==="") {
-    outputDisplay.textContent = "ERROR";
-  } else {
-    execOperate();
-    number1 = result.toString();
-    number2 = "";
-    pointer = "1";
-  }
 }
 
 function clearCurrent() {
@@ -163,11 +169,15 @@ function backspace() {
 }
 
 numberButtons.forEach(numberButton => {
-  numberButton.addEventListener('click', logKey);
+  numberButton.addEventListener('click', e => {
+    logKey(e.target.textContent);
+  });
 });
 
 operatorButtons.forEach(operatorButton => {
-  operatorButton.addEventListener('click', logOperator);
+  operatorButton.addEventListener('click', e => {
+    logOperator(e.target.textContent);
+  });
 });
 
 equalButton.addEventListener('click', logEqual);
@@ -175,4 +185,17 @@ equalButton.addEventListener('click', logEqual);
 clearButton.addEventListener('click', clearCurrent);
 clearAllButton.addEventListener('click', clearAll);
 
-backspaceButton.addEventListener('click', backspace)
+backspaceButton.addEventListener('click', backspace);
+
+document.addEventListener('keydown', e => {
+  console.log(e.key);
+  if(/[0-9\.]/.test(e.key)) {
+    logKey(e.key);
+  } else if (/[\+\-\*x\/]/.test(e.key)) {
+    logOperator(e.key);
+  } else if (/[=]/.test(e.key)) {
+    logEqual();
+  } else if (/[c]i/.test(e.key)) {
+    clearCurrent();
+  }
+});
