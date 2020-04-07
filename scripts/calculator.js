@@ -33,6 +33,7 @@ const operatorButtons = document.querySelectorAll('.operator');
 const equalButton = document.querySelector('#equal');
 const clearButton = document.getElementById('clear');
 const clearAllButton = document.getElementById('allClear');
+const backspaceButton = document.getElementById('backspace');
 
 const numberDisplay1 = document.querySelector('.numberDisplay1');
 const numberDisplay2 = document.querySelector('.numberDisplay2');
@@ -82,14 +83,16 @@ function logKey(e) {
 }
 
 function logOperator(e) {
-  if (pointer === "1") {
+  if(number1 === "") {
+    return;
+  } else if (pointer === "1") {
     operator = e.target.textContent;
     updateInputDisplay();
     pointer = "2";
   } else if (pointer === "2" && number2===""){
     operator = e.target.textContent;
     updateInputDisplay();
-  } else if (pointer === "2") {
+  } else if (pointer === "2" && number2!=="") {
     execOperate();
     number1 = result.toString();
     number2 = "";
@@ -142,6 +145,23 @@ function clearAll() {
   updateOutputDisplay();
 }
 
+function backspace() {
+  if (result!=="") {
+    result = "";
+    updateOutputDisplay();
+  } else if(pointer==="2" && number2!=="") {
+    number2 = number2.slice(0, number2.length-1);
+    updateInputDisplay();
+  } else if (pointer==="2" && operator!==""){
+    operator = "";
+    updateInputDisplay();
+    pointer = "1";
+  } else if (pointer==="1") {
+    number1 = number1.slice(0, number1.length-1);
+    updateInputDisplay();
+  }
+}
+
 numberButtons.forEach(numberButton => {
   numberButton.addEventListener('click', logKey);
 });
@@ -155,4 +175,4 @@ equalButton.addEventListener('click', logEqual);
 clearButton.addEventListener('click', clearCurrent);
 clearAllButton.addEventListener('click', clearAll);
 
-dotButton.addEventListener('click', logKey);
+backspaceButton.addEventListener('click', backspace)
